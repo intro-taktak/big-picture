@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="#">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic:wght@700&display=swap" rel="stylesheet">
+    <style>
+      div {
+        font-family: 'Andika New Basic', sans-serif;
+      }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <link href="../stylesheets/style.css" rel="stylesheet">
+    <script type="text/javascript">
+      function add_survey_item(survey_type, survey_type_id){
+        var div = document.createElement('div');
+        var dir_arr = document.getElementsByClassName(survey_type);
+        console.log(dir_arr.length);
+        div.innerHTML = dir_arr[0].innerHTML;
+        div.setAttribute("class", "survey-writing-item " + survey_type);
+        div.setAttribute("id", survey_type_id + dir_arr.length);
+        document.getElementById('SurveyWritingItemList').appendChild(div);
+      }
+
+      function add_survey_item_text(){
+        var text_class = 'survey-writing-text';
+        var text_id = 'SurveyText';
+
+        var item_arr = document.getElementsByClassName(text_class);
+        var item_id = text_id + item_arr.length;
+        
+        /* innerHTML data for text shell for survey */
+        var text_data = '<div><input type="text" class="form-control" placeholder="질문" name="' + item_id + '"></div><div><input type="text" class="form-control" placeholder="주관식 답변" disabled></div><hr><div class="d-flex"><div class="p-2"><button class="" onclick="remove_text_div(\'' + item_id + '\')" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:2rem; height:2rem; text-align: center; vertical-align: center; font-size:1rem;"><i class="far fa-trash-alt"></i></button></div></div>';
+
+        var div = document.createElement('div');
+        div.innerHTML = text_data;
+        div.setAttribute("class", "survey-writing-item " + text_class);
+        div.setAttribute("id", item_id);
+        document.getElementById('SurveyWritingItemList').appendChild(div);
+
+        console.log(item_arr.length);
+          
+        var sum = document.getElementById('TextSum');
+        sum.setAttribute('value', item_arr.length);
+      }
+      function add_survey_item_radio(){
+        var radio_class = 'survey-writing-radio';
+        var radio_id = 'SurveyRadio';
+
+        var item_arr = document.getElementsByClassName(radio_class);
+        var item_id = radio_id + item_arr.length;
+        var option_id = item_id + 'Option';
+
+        /* innerHTML data for radio shell for survey */
+        var radio_data = '<div><input type="text" class="form-control" placeholder="질문" name="' + item_id + '"></div><div><div class="input-group survey-writing-radio-option" id="' + option_id + 0 + '"><div class="input-group-text"><input type="radio" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 0 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 0 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-radio-option" id="' + option_id + 1 + '"><div class="input-group-text"><input type="radio" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 1 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 1 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-radio-option" id="' + option_id + 2 + '"><div class="input-group-text"><input type="radio" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 2 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 2 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-radio-option" id="' + option_id + 3 + '"><div class="input-group-text"><input type="radio" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 3 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 3 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-radio-option" id="' + option_id + 4 + '"><div class="input-group-text"><input type="radio" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 4 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 4 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div></div><hr><div class="d-flex"><div class="p-2"><button class="" onclick="remove_radio_div(\'' + item_id + '\')" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:2rem; height:2rem; text-align: center; vertical-align: center; font-size:1rem;"><i class="far fa-trash-alt"></i></button></div></div>';
+
+        var div = document.createElement('div');
+        div.innerHTML = radio_data;
+        div.setAttribute("class", "survey-writing-item " + radio_class);
+        div.setAttribute("id", item_id);
+        document.getElementById('SurveyWritingItemList').appendChild(div);
+          
+        var sum = document.getElementById('RadioSum');
+        sum.setAttribute('value', item_arr.length);
+      }
+      function add_survey_item_dropbox(){
+        var dropbox_class = 'survey-writing-dropbox';
+        var dropbox_id = 'SurveyDropbox';
+
+        var item_arr = document.getElementsByClassName(dropbox_class);
+        var item_id = dropbox_id + item_arr.length;
+        var option_id = item_id + 'Option';
+
+        /* innerHTML data for dropdown shell for survey */
+        var dropbox_data = '<div><input type="text" class="form-control" placeholder="질문" name="' + item_id + '"></div><div><div class="input-group survey-writing-dropbox-option" id="' + option_id + 0 + '"><div class="input-group-text"><i class="fas fa-caret-down"></i></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 0 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 0 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-dropbox-option" id="' + option_id + 1 + '"><div class="input-group-text"><i class="fas fa-caret-down"></i></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 1 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 1 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-dropbox-option" id="' + option_id + 2 + '"><div class="input-group-text"><i class="fas fa-caret-down"></i></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 2 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 2 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-dropbox-option" id="' + option_id + 3 + '"><div class="input-group-text"><i class="fas fa-caret-down"></i></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 3 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 3 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-dropbox-option" id="' + option_id + 4 + '"><div class="input-group-text"><i class="fas fa-caret-down"></i></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 4 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 4 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div></div><hr><div class="d-flex"><div class="p-2"><button class="" onclick="remove_dropbox_div(\'' + item_id + '\')" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:2rem; height:2rem; text-align: center; vertical-align: center; font-size:1rem;"><i class="far fa-trash-alt"></i></button></div></div>';
+
+        var div = document.createElement('div');
+        div.innerHTML = dropbox_data;
+        div.setAttribute("class", "survey-writing-item " + dropbox_class);
+        div.setAttribute("id", item_id);
+        document.getElementById('SurveyWritingItemList').appendChild(div);
+          
+        var sum = document.getElementById('DropboxSum');
+        sum.setAttribute('value', item_arr.length);
+      }
+      function add_survey_item_checkbox(){
+        var checkbox_class = 'survey-writing-checkbox';
+        var checkbox_id = 'SurveyCheckbox';
+
+        var item_arr = document.getElementsByClassName(checkbox_class);
+        var item_id = checkbox_id + item_arr.length;
+        var option_id = item_id + 'Option';
+
+        /* innerHTML data for checkbox shell for survey */
+        var checkbox_data = '<div><input type="text" class="form-control" placeholder="질문" name="' + item_id + '"></div><div><div class="input-group survey-writing-checkbox-option" id="' + option_id + 0 + '"><div class="input-group-text"><input type="checkbox" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 0 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 0 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-checkbox-option" id="' + option_id + 1 + '"><div class="input-group-text"><input type="checkbox" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 1 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 1 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-checkbox-option" id="' + option_id + 2 + '"><div class="input-group-text"><input type="checkbox" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 2 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 2 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-checkbox-option" id="' + option_id + 3 + '"><div class="input-group-text"><input type="checkbox" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 3 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 3 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div><div class="input-group survey-writing-checkbox-option" id="' + option_id + 4 + '"><div class="input-group-text"><input type="checkbox" disabled></div><input type="text" class="form-control" placeholder="응답" name="' + option_id + 4 + '"><div class="input-group-append"><button class="btn btn-danger" onclick="remove_div(\'' + option_id + 4 + '\')"><i class="fas fa-times" style="color:#ffffff;"></i></button></div></div></div><hr><div class="d-flex"><div class="p-2"><button class="" onclick="remove_checkbox_div(\'' + item_id + '\')" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:2rem; height:2rem; text-align: center; vertical-align: center; font-size:1rem;"><i class="far fa-trash-alt"></i></button></div></div>';
+
+        var div = document.createElement('div');
+        div.innerHTML = checkbox_data;
+        div.setAttribute("class", "survey-writing-item " + checkbox_class);
+        div.setAttribute("id", item_id);
+        document.getElementById('SurveyWritingItemList').appendChild(div);
+          
+        var sum = document.getElementById('CheckboxSum');
+        sum.setAttribute('value', item_arr.length);
+      }
+        
+      function remove_div(div_id){
+        var child = document.getElementById(div_id);
+        child.parentNode.removeChild(child);  
+      }
+        
+      /* shell removing, remaining data indexing */
+      function remove_text_div(div_id){
+        var item_arr = document.getElementsByClassName('survey-writing-text').length;
+        var child = document.getElementById(div_id);
+        child.parentNode.removeChild(child);
+        
+        console.log(item_arr);
+          
+        var sum = document.getElementById('TextSum');
+        sum.setAttribute('value', item_arr - 1);
+      }
+      function remove_radio_div(div_id){
+        var item_arr = document.getElementsByClassName('survey-writing-radio').length;
+        var child = document.getElementById(div_id);
+        child.parentNode.removeChild(child);
+          
+        var sum = document.getElementById('RadioSum');
+        sum.setAttribute('value', item_arr - 1);
+      }
+      function remove_dropbox_div(div_id){
+        var item_arr = document.getElementsByClassName('survey-writing-dropbox').length;
+        var child = document.getElementById(div_id);
+        child.parentNode.removeChild(child);
+          
+        var sum = document.getElementById('DropboxSum');
+        sum.setAttribute('value', item_arr - 1);
+      }
+      function remove_checkbox_div(div_id){
+        var item_arr = document.getElementsByClassName('survey-writing-checkbox').length;
+        var child = document.getElementById(div_id);
+        child.parentNode.removeChild(child);
+          
+        var sum = document.getElementById('CheckboxSum');
+        sum.setAttribute('value', item_arr - 1);
+      }
+    </script>
+  </head>
+  <body>
+    <header class="sticky-top" style="background-color:#000000;" >
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+              <a href="../" style="color:black">
+            <img src="../images/sw.png" style="max-height:3rem; margin-right:.25rem">
+            <h3 style="display:inline-block; vertical-align:middle; margin-top:8px; font-family: 'Quicksand', sans-serif; font-size: 1.5rem; color:#ffffff;" >BIG PICTURE</h3>
+            </a>
+          </div>
+          <div id="UserTap">
+            <a href="../users/login" style="color:black"><div style="font-size:2.5rem;color:#ffffff;">
+              <i class="fas fa-user-circle"></i>
+            </div></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <hr style="margin:0;">
+    <section class="container">
+      <div class="d-flex justify-content-between" style="padding-top: 3rem;">
+        <div>
+          <h2 style="font-size:3rem;font-weight:700;">
+            Surveys
+          </h2>
+          <p style="font-weight:100;">
+            Researchs, Polls, and Surveys Whatever!
+          </p>
+        </div>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-dark" style="border-radius:32px;">
+            <i class="fas fa-plus"></i> New Surveys
+          </button>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center" id="SurveyJumbotron" style="padding: 1rem; border-radius:.25rem; border: 1px solid rgba(0, 0, 0, 0.15); margin-top: 2rem; margin-bottom: 1rem;">
+        <div>
+          <h3>
+            Create Public Surveys
+          </h3>
+          <p>
+            Open a dialogue, accept contributions, and get insights: improve your dataset by publishing it on Big Picture.
+          </p>
+        </div>
+        <div>
+          <a href='https://www.freepik.com/vectors/work'>
+            <img src="../images/surveyimg.png" style="max-height: 10rem;">
+          </a>
+        </div>
+      </div>
+    </section>
+    <section id="SurveyWriting" class="container">
+      <div class="row">
+        <div class="col-sm-9">
+          <form method="post" action="">
+          <div id="SurveyWritingItemList">
+            <div class="survey-writing-item">
+              <div class="form-group" style="margin-bottom: .5rem;">
+                <label>Survey Title:</label>
+                <input type="text" class="form-control survey-writing-title" name="title" value="제목 없는 설문지" required>
+              </div>
+              <div class="form-group" style="margin-bottom: .5rem;">
+                <label>Info:</label>
+                <input type="text" class="form-control" name="info" placeholder="설문지 설명">
+              </div>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                    <label>Created By:</label>
+                    <input type="text" class="form-control" name="writer" placeholder="작성자">
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Category:</label>
+                    <select class="form-control" name="category">
+                      <option value="0">Social</option>
+                      <option value="1">Cultural</option>
+                      <option value="2">Economical</option>
+                      <option value="3">IT</option>
+                      <option value="4">Et cetera</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+          <input type="hidden" id="TextSum" name="TextSum" value="0">
+          <input type="hidden" id="RadioSum" name="RadioSum" value="0">
+          <input type="hidden" id="CheckboxSum" name="CheckboxSum" value="0">
+          <input type="hidden" id="DropboxSum" name="DropboxSum" value="0">
+          <button type="submit" class="btn btn-success form-control">작성</button>
+          </form>
+        </div>
+        <div class="col-sm-3">
+          <div class="sticky-top" style="padding-top:5rem;">
+            <div style="border: 1px solid rgba(0, 0, 0, 0.15); display:inline-block; border-radius:.5rem;">
+              <button onclick="add_survey_item_text()" class="" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:4rem; height:4rem; text-align: center; vertical-align: center; font-size:2rem; margin:.8rem;">
+                <i class="fas fa-pen-square"></i>
+              </button><br>
+              <button onclick="add_survey_item_radio()" class="" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:4rem; height:4rem; text-align: center; vertical-align: center; font-size:2rem; margin:.8rem;">
+                <i class="far fa-dot-circle"></i>
+              </button><br>
+              <button onclick="add_survey_item_checkbox()" class="" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:4rem; height:4rem; text-align: center; vertical-align: center; font-size:2rem; margin:.8rem;">
+                <i class="fas fa-check-square"></i>
+              </button><br>
+              <button onclick="add_survey_item_dropbox()" class="" style="border: 2px solid rgba(0,0,0,0.3); border-radius: .25rem; background:#ffffff; width:4rem; height:4rem; text-align: center; vertical-align: center; font-size:2rem; margin:.8rem;">
+                <i class="fas fa-caret-square-down"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+        <footer style="background: #000000;margin-top:3rem;">
+            <div class="container">
+                <div style="padding: 2rem 0; color:#ffffff; vertical-align: middle; text-align:center;">
+                    <img src="images/sw.png" style="max-height: 2rem; margin-bottom: 0.25rem; margin-right: .25rem;"> Copyright 2020. Intro all rights reserved.
+                </div>
+            </div>
+        </footer>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="shortcut icon" href="#" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+            crossorigin="anonymous"
+        />
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"
+        ></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Andika+New+Basic:wght@700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            div {
+                font-family: 'Andika New Basic', sans-serif;
+            }
+        </style>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"
+            rel="stylesheet"
+        />
+        <link href="stylesheets/style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header class="sticky-top" style="background-color: #000000;">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="" style="color: black;">
+                            <img
+                                src="images/sw.png"
+                                style="max-height: 3rem; margin-right: 0.25rem;"
+                            />
+                            <h3
+                                style="
+                                    display: inline-block;
+                                    vertical-align: middle;
+                                    margin-top: 8px;
+                                    font-family: 'Quicksand', sans-serif;
+                                    font-size: 1.5rem;
+                                    color: #ffffff;
+                                "
+                            >
+                                BIG PICTURE
+                            </h3>
+                        </a>
+                    </div>
+                    <div id="UserTap">
+                        <a href="users/login" style="color: black;"
+                            ><div style="font-size: 2.5rem; color: #ffffff;">
+                                <i class="fas fa-user-circle"></i></div
+                        ></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <hr style="margin: 0;" />
+        <!-- Search form -->
+        <section class="container">
+            <div class="d-flex justify-content-between" style="padding-top: 3rem;">
+                <div>
+                    <h2 style="font-size: 3rem; font-weight: 700;">
+                        Surveys
+                    </h2>
+                    <p style="font-weight: 100;">
+                        Researchs, Polls, and Surveys Whatever!
+                    </p>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a href="survey/write"
+                        ><button class="btn btn-dark" style="border-radius: 32px;">
+                            <i class="fas fa-plus"></i> New Surveys
+                        </button></a
+                    >
+                </div>
+            </div>
+            <div
+                class="d-flex justify-content-between align-items-center"
+                id="SurveyJumbotron"
+                style="
+                    padding: 1rem;
+                    border-radius: 0.25rem;
+                    border: 1px solid rgba(0, 0, 0, 0.15);
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                "
+            >
+                <div>
+                    <h3>
+                        Create Public Surveys
+                    </h3>
+                    <p>
+                        Open a dialogue, accept contributions, and get insights: improve your
+                        dataset by publishing it on Big Picture.
+                    </p>
+                </div>
+                <div>
+                    <a href="https://www.freepik.com/vectors/work">
+                        <img src="images/surveyimg.png" style="max-height: 10rem;" />
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="SurveySearch" class="" style="margin-bottom:1rem;">
+                        <div class="input-group mb-3" style="padding: 0; margin: 0;">
+                            <div class="input-group-prepend">
+                                <button class="btn" id="SurveySearchBtn" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="SurveySearchInput"
+                                placeholder="Search"
+                            />
+                        </div>
+                    </div>
+                    <!-- SurveyList -->
+                    <div id="SurveyList">
+                        <div id="SurveyListTags"></div>
+                        <div id="SurveyListItems">
+                            <!-- category class tagging -->
+                            <% for(var i = list.length - 1; i >= 0; i--){ %>
+                            <a href="https://big-picture-mwng.run.goorm.io/answer/<%=list[i]._id%>"
+                                ><div
+                                    class="survey-item-card <%
+                                                 var idx = list[i].category;
+                                                 switch(idx) {
+                                                     case '0':
+                                                         %>survey-category-yellow<%
+                                                         break;
+                                                     case '1':
+                                                         %>survey-category-green<%
+                                                         break;
+                                                     case '2':
+                                                         %>survey-category-red<%
+                                                         break;
+                                                     case '3':
+                                                         %>survey-category-blue<%
+                                                         break;
+                                                     default:
+                                                         %>survey-category-gray<%
+                                                 }
+                                            %> d-flex justify-content-between align-items-center"
+                                >
+                                    <div class="d-flex justify-content-left">
+                                        <div>
+                                            <img
+                                            <%
+                                                 var idx = list[i].category;
+                                                 switch(idx) {
+                                                     case '0':
+                                                         %>src="images/cate_social.jpg"<%
+                                                         break;
+                                                     case '1':
+                                                         %>src="images/cate_cultural.jpg"<%
+                                                         break;
+                                                     case '2':
+                                                         %>src="images/cate_economical.jpg"<%
+                                                         break;
+                                                     case '3':
+                                                         %>src="images/cate_it.jpg"<%
+                                                         break;
+                                                     default:
+                                                         %>src="images/s.png"<%
+                                                 }
+                                            %>
+                                                class="survey-item-img"
+                                                style="max-height: 4rem;"
+                                            />
+                                        </div>
+                                        <div class="survey-item-info">
+                                            <h5 class="survey-item-title">
+                                                <%= list[i].title %>
+                                            </h5>
+                                            <div class="survey-item-etc">
+                                                <span><%= list[i].info %></span>
+                                            </div>
+                                            <hr style="margin:.125rem;">
+                                            <div class="survey-item-writer">
+                                                <span><%= list[i].writer %></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                            <a href="https://big-picture-mwng.run.goorm.io/answer/<%=list[i]._id%>"><button type="button" class="btn btn-sm btn-secondary" style="margin-left:1rem;width:4.5rem;">
+                                                <i class="fas fa-vote-yea"></i> 참여
+                                            </button></a>
+                                            <a href="https://big-picture-mwng.run.goorm.io/result/<%=list[i]._id%>"><button type="button" class="btn btn-sm btn-secondary" style="margin-left:.25rem;width:4.5rem;">
+                                                <i class="fas fa-poll-h"></i> 결과
+                                            </button></a>
+                                    </div>
+                                </div
+                            ></a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="sticky-top" style="padding-top:5rem;">
+                    <h5>Categories</h5>
+                    <hr>
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action survey-category-yellow">Social</a>
+                      <a href="#" class="list-group-item list-group-item-action survey-category-green">Cultural</a>
+                      <a href="#" class="list-group-item list-group-item-action survey-category-red">Economical</a>
+                      <a href="#" class="list-group-item list-group-item-action survey-category-blue">IT</a>
+                      <a href="#" class="list-group-item list-group-item-action survey-category-gray">Et cetera</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+        <footer style="background: #000000;margin-top:3rem;">
+            <div class="container">
+                <div style="padding: 2rem 0; color:#ffffff; vertical-align: middle; text-align:center;">
+                    <img src="images/sw.png" style="max-height: 2rem; margin-bottom: 0.25rem; margin-right: .25rem;"> Copyright 2020. Intro all rights reserved.
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
